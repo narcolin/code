@@ -1,7 +1,5 @@
-# CSC 202 Project 2
-# Nicole Arcolino
-
 from stack_array import Stack
+
 
 # You do not need to change this class
 class PostfixFormatException(Exception):
@@ -41,7 +39,7 @@ def to_a_number(token):
         try:
             return float(token)
         except ValueError:
-            raise(PostfixFormatException(f"Invalid token"))
+            raise(PostfixFormatException(f"Invalid Token"))
 
 def is_a_number(token):
     try:
@@ -74,12 +72,13 @@ def calculate(operator, num1, num2):
     else:
         return num1 ** num2
 
+
 def postfix_eval(input_str):
     '''Evaluates a postfix expression
-    
-    Input argument:  a string containing a postfix expression where tokens 
+
+    Input argument:  a string containing a postfix expression where tokens
     are space separated.  Tokens are either operators + - * / ** >> << or numbers.
-    Returns the result of the expression evaluation. 
+    Returns the result of the expression evaluation.
     Raises an PostfixFormatException if the input is not well-formed
     DO NOT USE PYTHON'S EVAL FUNCTION!!!'''
     stack = Stack(30)
@@ -89,12 +88,12 @@ def postfix_eval(input_str):
             try:
                 num1 = stack.pop()
             except IndexError:
-                raise PostfixFormatException("Insufficient operands")
+                raise PostfixFormatException("Insufficient Operands")
             if num1 not in operators:
                 try:
                     num2 = stack.peek()
                 except IndexError:
-                    raise PostfixFormatException("Insufficient operands")
+                    raise PostfixFormatException("Insufficient Operands")
                 if num2 not in operators:
                     num2 = stack.pop()
                     stack.push(calculate(token, num1, num2))
@@ -103,14 +102,14 @@ def postfix_eval(input_str):
         else:
             stack.push(token)
     if stack.size() > 1:
-        raise PostfixFormatException("Too many operands")
+        raise PostfixFormatException("Too Many Operands")
     return stack.peek()
 
 
 def infix_to_postfix(input_str):
     '''Converts an infix expression to an equivalent postfix expression
 
-    Input argument:  a string containing an infix expression where tokens are 
+    Input argument:  a string containing an infix expression where tokens are
     space separated.  Tokens are either operators + - * / ** >> << parentheses ( ) or numbers
     Returns a String containing a postfix expression '''
     operator_stack = Stack(30)
@@ -136,10 +135,10 @@ def infix_to_postfix(input_str):
                 try:
                     postfix.append(operator_stack.pop())
                 except IndexError:
-                    raise PostfixFormatException("Insufficient operands")
+                    raise PostfixFormatException("Insufficient Operands")
             operator_stack.push(token)
         else:
-            raise (PostfixFormatException(f"Invalid token"))
+            raise (PostfixFormatException(f"Invalid Token"))
     while not operator_stack.is_empty():
         postfix.append(operator_stack.pop())
     return " ".join(postfix)
@@ -147,10 +146,10 @@ def infix_to_postfix(input_str):
 
 def prefix_to_postfix(input_str):
     '''Converts a prefix expression to an equivalent postfix expression
-    
-    Input argument:  a string containing a prefix expression where tokens are 
-    space separated.  Tokens are either operators + - * / ** >> << or numbers
-    Returns a String containing a postfix expression (tokens are space separated)'''
+
+    Input argument:  a string containing a prefix expression where tokens are
+    space separated.  Tokens are either operators + - * / ** >> << parentheses ( ) or numbers
+    Returns a String containing a postfix expression(tokens are space separated)'''
     operator_stack = Stack(30)
     tokens = handle_input(input_str)
     postfix = ''
@@ -162,17 +161,15 @@ def prefix_to_postfix(input_str):
             try:
                 o1 = operator_stack.pop()
             except IndexError:
-                raise PostfixFormatException("Insufficient operands")
+                raise PostfixFormatException("Insufficient Operands")
             try:
                 o2 = operator_stack.pop()
             except IndexError:
-                raise PostfixFormatException("Insufficient operands")
+                raise PostfixFormatException("Insufficient Operands")
             result_postfix = o1 + " " + o2 + " " + token
             operator_stack.push(result_postfix)
         else:
-            raise (PostfixFormatException("Invalid token"))
+            raise (PostfixFormatException("Invalid Token"))
     if operator_stack.size() > 1:
-        raise PostfixFormatException("Too many operands")
+        raise PostfixFormatException("Too Many Operands")
     return operator_stack.pop()
-
-

@@ -1,4 +1,4 @@
-# 202 Project 1 - 2
+# 202 Project 1
 # Nicole Arcolino
 
 table = {
@@ -32,3 +32,5 @@ def convert(num, b):
     if num == 0:
         return "0"
     return convert_helper(num, b, '')
+
+

@@ -1,41 +1,40 @@
-# CSC 202 Project 2
-# Nicole Arcolino
-
 # Start of unittest - add to completely test functions in exp_eval
 
 import unittest
 from exp_eval import *
 
 class test_expressions(unittest.TestCase):
-    def test_postfix_eval_01(self):
-        self.assertAlmostEqual(postfix_eval("3 5 +"), 8)
+    # def test_postfix_eval_01(self):
+    #     self.assertAlmostEqual(postfix_eval("3 5 +"), 8)
+    #     self.assertAlmostEqual(postfix_eval("25 5 /"), .2)
+    #     self.assertAlmostEqual(postfix_eval("2 12 ** 2 -"), -142)
 
     def test_postfix_eval_02(self):
         try:
             postfix_eval("blah")
             self.fail()
         except PostfixFormatException as e:
-            self.assertEqual(str(e), "Invalid token")
+            self.assertEqual(str(e), "Invalid Token")
 
     def test_postfix_eval_03(self):
         try:
             postfix_eval("4 +")
             self.fail()
         except PostfixFormatException as e:
-            self.assertEqual(str(e), "Insufficient operands")
+            self.assertEqual(str(e), "Insufficient Operands")
 
     def test_postfix_eval_04(self):
         try:
             postfix_eval("1 2 3 +")
             self.fail()
         except PostfixFormatException as e:
-            self.assertEqual(str(e), "Too many operands")
+            self.assertEqual(str(e), "Too Many Operands")
 
     def test_infix_to_postfix_01(self):
         self.assertEqual(infix_to_postfix("6 - 3"), "6 3 -")
         self.assertEqual(infix_to_postfix("6"), "6")
         self.assertEqual(infix_to_postfix("15 / 3"), "15 3 /")
-        
+
     def test_prefix_to_postfix(self):
         self.assertEqual(prefix_to_postfix("* - 3 / 2 1 - / 4 5 6"), "3 2 1 / - 4 5 / 6 - *")
         self.assertEqual(prefix_to_postfix("** 5 7"), "5 7 **")
@@ -101,6 +100,7 @@ class test_expressions(unittest.TestCase):
 
     def test_19_postfix_eval_bit_shift(self):
         self.assertEqual(16, postfix_eval('1 4 <<'))
+
 
 if __name__ == "__main__":
     unittest.main()

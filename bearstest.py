@@ -1,5 +1,5 @@
 import unittest
-from teddybearpicnic import bears
+from bears import bears
 
 from base_convert import convert_helper
 from base_convert import convert

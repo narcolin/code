@@ -1,6 +1,3 @@
-# CSC 202 Lab 4
-# Nicole Arcolino
-
 import unittest
 from ordered_list import *
 
@@ -67,5 +64,6 @@ class TestLab4(unittest.TestCase):
         self.assertEqual(t_list.python_list(), [-144, -7, 144])
         with self.assertRaises(IndexError): t_list.pop(5)
 
-if __name__ == '__main__': 
+
+if __name__ == '__main__':
     unittest.main()

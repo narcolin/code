@@ -1,6 +1,3 @@
-# Lab 2
-# Nicole Arcolino
-
 class Node:
     def __init__(self, data):
         self.data = data
